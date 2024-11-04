@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{ asset('dashboard')}}/assets/css/icons.min.css" rel="stylesheet" type="text/css">
     <script src="{{ asset('dashboard')}}/assets/js/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -67,6 +68,23 @@
                             <span class="menu-icon"><i class="fa-regular fa-user"></i></span>
                             <span class="menu-text"> Profile </span>
                         </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="#menucatagory" data-bs-toggle="collapse" class="menu-link waves-effect waves-light">
+                            <span class="menu-icon"><i class="bx bx-file"></i></span>
+                            <span class="menu-text"> Catagory </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="menucatagory">
+                            <ul class="sub-menu">
+                                <li class="menu-item">
+                                    <a class='menu-link' href='{{ route('category.index') }}'>
+                                        <span class="menu-text">Show catagories</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
 
                     <li class="menu-item">
@@ -345,7 +363,12 @@
 
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="{{ asset('dashboard')}}/assets/images/users/avatar-4.jpg" alt="user-image" class="rounded-circle">
+                                @if (auth()->user()->image == 'default.jpg' )
+                                <img src="{{asset('uploads/default')}}/{{auth()->user()->image}}" alt="user-image" class="rounded-circle">
+
+                                @else
+                                <img src="{{ asset('uploads/profile') }}/{{auth()->user()->image}}" alt="user-image" class="rounded-circle">
+                                @endif
                                 <span class="ms-1 d-none d-md-inline-block">
                                     {{ auth()->user()->name }} . <i class="mdi mdi-chevron-down"></i>
                                 </span>
@@ -466,7 +489,10 @@
 
     <!-- Dashboard init-->
     <script src="{{ asset('dashboard')}}/assets/js/pages/dashboard.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
+
+    @yield('script')
 </body>
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //profile
 Route::get('/profile', [App\Http\Controllers\ProfileController::class,'index'])->name("profile");
+Route::post('/profile/name/update', [App\Http\Controllers\ProfileController::class,'name_update'])->name("profile.name.update");
+Route::post('/profile/email/update', [App\Http\Controllers\ProfileController::class,'email_update'])->name("profile.email.update");
+Route::post('/profile/password/update', [App\Http\Controllers\ProfileController::class,'password_update'])->name("profile.password.update");
+Route::post('/profile/image/update', [App\Http\Controllers\ProfileController::class,'image_update'])->name("profile.image.update");
+
+//category
+Route::get('/category',[CategoryController::class,'index'])->name('category.index');
+Route::post('/category/store',[CategoryController::class,'store'])->name('category.store');
