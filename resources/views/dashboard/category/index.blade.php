@@ -32,7 +32,14 @@
                                 </td>
                                 <td>{{ $category->title }}</td>
                                 <td>
-                                    <a class="badge bg-danger">{{ $category->status }}</a>
+                                    <form id="hulk{{$category->id}}" action="{{route('category.status',$category->slug)}}" method="POST">
+                                        @csrf
+                                        <div class="form-check form-switch">
+                                            <input onchange="document.querySelector('#hulk{{$category->id}}').submit()" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ $category->status == 'active' ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="flexSwitchCheckChecked">{{ $category->status }}</label>
+
+                                        </div>
+                                    </form>
                                 </td>
                                 <td>
                                     <a href="{{route('category.edit',$category->slug)}}" class="btn btn-info btn-sm">
