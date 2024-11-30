@@ -61,7 +61,27 @@
                         </a>
                     </li>
 
-                    <li class="menu-title">Custom</li>
+                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'manager' )
+                    <li class="menu-title">Manage Roles & Permission</li>
+                    <li class="menu-item">
+                        <a href="#menuRole" data-bs-toggle="collapse" class="menu-link waves-effect waves-light">
+                            <span class="menu-icon"><i class="bx bx-file"></i></span>
+                            <span class="menu-text">Roles & Permission</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="menuRole">
+                            <ul class="sub-menu">
+                                <li class="menu-item">
+                                    <a class='menu-link' href= {{route('management.index')}} >
+                                        <span class="menu-text">Assign Role & Permission</span>
+                                    </a>
+
+
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    @endif
 
                     <li class="menu-item">
                         <a class='menu-link waves-effect waves-light' href='{{route('profile')}}'>

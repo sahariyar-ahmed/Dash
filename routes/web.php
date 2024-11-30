@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/',[FrontendController ::class,'index'])->name('root');
 
@@ -19,6 +20,13 @@ Route::get('/',[FrontendController ::class,'index'])->name('root');
 
 //dashboard-routes
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+//management
+Route::get('/management', [ManagementController::class,'index'])->name("management.index");
+Route::post('/management/user/register', [ManagementController::class,'store_register'])->name("management.store");
+Route::post('/management/user/manager/down{id}', [ManagementController::class,'manager_down'])->name("management.down");
+
+
 
 //profile
 Route::get('/profile', [App\Http\Controllers\ProfileController::class,'index'])->name("profile");
